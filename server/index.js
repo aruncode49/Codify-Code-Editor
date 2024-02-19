@@ -18,7 +18,12 @@ const PORT = 8080;
 const sessionOptions = {
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  },
 };
 
 app.use(cors());
@@ -37,23 +42,32 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// import routes
+import authRoutes from "./routes/auth.routes.js";
+
 app.get("/", (req, res) => {
+  console.log(req.isAuthenticated());
   res.send("Hello From Codify Server");
 });
 
-app.get("/demo-code", async (req, res) => {
-  const fakeCode = new Code({
-    code: {
-      html: `<h1>Hello World</h1>`,
-      css: `h1: {color: "red"}`,
-      javascript: `console.log("Hello world")`,
-    },
-    owner: "65d32d1090bfb01d7af5caeb",
-  });
+app.use("/api/v1/auth", authRoutes);
 
-  const insertedCode = await fakeCode.save();
+app.get("/test", async (req, res) => {
+  // const fakeCode = new Code({
+  //   code: {
+  //     html: `<h1>Hello World</h1>`,
+  //     css: `h1: {color: "red"}`,
+  //     javascript: `console.log("Hello world")`,
+  //   },
+  //   owner: "65d32d1090bfb01d7af5caeb",
+  // });
 
-  res.send(insertedCode);
+  // const insertedCode = await fakeCode.save();
+
+  // res.send(insertedCode);
+
+  // console.log(req.user);
+  res.send("hello");
 });
 
 function startServer() {
