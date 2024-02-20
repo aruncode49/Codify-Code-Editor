@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post("/signup", signupController);
 
-router.post("/login", passport.authenticate("local"), loginController);
+router.post("/login", authenticateUser, loginController);
 
 router.post("/logout", logoutController);
 

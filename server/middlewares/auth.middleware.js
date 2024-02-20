@@ -15,6 +15,12 @@ export function authenticateUser(req, res, next) {
         message: "Invalid username or password",
       });
     }
-    next();
+    // If authentication succeeds, manually set req.user and call next
+    req.login(user, function (err) {
+      if (err) {
+        return next(err);
+      }
+      next();
+    });
   })(req, res, next);
 }
