@@ -9,7 +9,7 @@ const Header = () => {
       </Link>
 
       <Link
-        className="px-2 py-1 bg-primary hover:bg-hover rounded-md "
+        className="px-4 py-2 text-sm bg-blue-600 hover:bg-transparent border border-blue-600 rounded font-medium "
         to="/login"
       >
         Get Started
