@@ -2,7 +2,6 @@ import { User } from "../models/user.model.js";
 
 async function signupController(req, res) {
   try {
-    console.log("before signup", req.user);
     const { email, username, password } = req.body;
     const newUser = new User({
       email,
@@ -12,7 +11,6 @@ async function signupController(req, res) {
     req.login(registeredUser, (err) => {
       if (err) console.log(err);
     });
-    console.log("after signup", req.user);
     return res.status(201).json({
       success: true,
       message: "User created successfully",
@@ -29,7 +27,6 @@ async function signupController(req, res) {
 
 async function loginController(req, res) {
   try {
-    console.log(req.user);
     return res.status(200).json({
       success: true,
       message: "User logged in successfully",
@@ -49,7 +46,6 @@ function logoutController(req, res) {
     req.logout((err) => {
       if (err) console.log(err);
     });
-    console.log(req.user);
     return res.status(200).json({
       success: true,
       message: "User logout successfully",
@@ -59,4 +55,17 @@ function logoutController(req, res) {
   }
 }
 
-export { signupController, loginController, logoutController };
+function getUserController(req, res) {
+  return res.status(200).json({
+    success: true,
+    message: "User is authenticated",
+    user: req.user,
+  });
+}
+
+export {
+  signupController,
+  loginController,
+  logoutController,
+  getUserController,
+};

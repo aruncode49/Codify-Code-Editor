@@ -1,12 +1,12 @@
 import express from "express";
-import passport from "passport";
 import {
   loginController,
   signupController,
   logoutController,
+  getUserController,
 } from "../controllers/auth.controllers.js";
 
-import { authenticateUser } from "../middlewares/auth.middleware.js";
+import { authenticateUser, isLogin } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -15,5 +15,7 @@ router.post("/signup", signupController);
 router.post("/login", authenticateUser, loginController);
 
 router.post("/logout", logoutController);
+
+router.get("/get-user", isLogin, getUserController);
 
 export default router;
