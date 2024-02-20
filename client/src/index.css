@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .fullscreen {
+    width: 100%;
+    height: calc(100vh - 56px);
+  }
+}
+
 body {
   font-family: "Outfit", sans-serif;
   background-color: #0f172a;
