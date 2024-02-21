@@ -1,14 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { SubmitButton } from "../components";
 import { validateForm } from "../utils/validation";
 import toast from "react-hot-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoginState } from "../app/auth/authSlice";
 
 const Login = () => {
   const email = "xxxxx@gmail.com";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const isLogin = useSelector((state) => state.auth.isLogin);
+
+  // early return
+  if (isLogin) {
+    return <Navigate to={"/code"} />;
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -21,8 +33,8 @@ const Login = () => {
 
         if (res?.data?.success) {
           toast.success(res?.data?.message);
-          // update redux store
-          // navigate to
+          dispatch(setLoginState(true));
+          navigate("/code");
           console.log(res?.data?.user);
         }
       }

@@ -6,14 +6,23 @@ function validateEmail(email) {
 }
 
 function validateUsername(username) {
-  const usernameRegex = /^[a-z0-9]{6,}$/;
-  return usernameRegex.test(username) && username === username.toLowerCase();
+  if (username.length < 6) {
+    toast.error("Username should be 6 characters long");
+    return false;
+  }
+  if (username !== username.toLowerCase()) {
+    toast.error("Username should be lowercase");
+    return false;
+  }
+  return true;
 }
 
 function validatePassword(password) {
-  const passwordRegex =
-    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{4,}$/;
-  return passwordRegex.test(password);
+  if (password.length < 6) {
+    toast.error("Password length should be 6 characters long");
+    return false;
+  }
+  return true;
 }
 
 export function validateForm(email, username, password) {
@@ -28,16 +37,10 @@ export function validateForm(email, username, password) {
   }
 
   if (!validateUsername(username)) {
-    toast.error(
-      "Username should be at least 6 characters long and contain only lowercase letters and numbers."
-    );
     return false;
   }
 
   if (!validatePassword(password)) {
-    toast.error(
-      "Password should be at least 4 characters long and contain at least one letter and one number."
-    );
     return false;
   }
 
