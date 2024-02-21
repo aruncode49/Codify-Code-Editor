@@ -1,11 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { SubmitButton } from "../components";
+import { validateForm } from "../utils/validation";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Signup = () => {
-  function handleSubmit(e) {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log("login");
+    try {
+      if (validateForm(email, username, password)) {
+        const res = await axios.post("/api/v1/auth/signup", {
+          email,
+          username,
+          password,
+        });
+
+        if (res?.data?.success) {
+          toast.success(res?.data?.message);
+          // update redux store
+          // navigate to
+          console.log(res?.data?.user);
+        }
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   }
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -29,6 +53,8 @@ const Signup = () => {
               type="email"
               className="w-full bg-gray-200 placeholder:text-gray-500 text-black rounded-lg p-4 pe-12 text-sm shadow-sm"
               placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>
@@ -43,6 +69,8 @@ const Signup = () => {
               type="text"
               className="w-full bg-gray-200 placeholder:text-gray-500 text-black rounded-lg p-4 pe-12 text-sm shadow-sm"
               placeholder="Enter username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
         </div>
@@ -57,6 +85,8 @@ const Signup = () => {
               type="password"
               className="w-full bg-gray-200 placeholder:text-gray-500 text-black rounded-lg p-4 pe-12 text-sm shadow-sm"
               placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
         </div>
@@ -71,7 +101,7 @@ const Signup = () => {
 
           <SubmitButton
             handleSubmit={handleSubmit}
-            text={"Sign In"}
+            text={"Register"}
             color={"bg-blue-500"}
             hoverColor={"hover:bg-blue-600"}
             px={"px-5"}

@@ -1,10 +1,35 @@
 import { Link } from "react-router-dom";
 import { SubmitButton } from "../components";
+import { validateForm } from "../utils/validation";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
-  function handleSubmit(e) {
+  const email = "xxxxx@gmail.com";
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log("login");
+    try {
+      if (validateForm(email, username, password)) {
+        const res = await axios.post("/api/v1/auth/login", {
+          username,
+          password,
+        });
+
+        if (res?.data?.success) {
+          toast.success(res?.data?.message);
+          // update redux store
+          // navigate to
+          console.log(res?.data?.user);
+        }
+      }
+    } catch (error) {
+      console.log(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message);
+    }
   }
 
   return (
@@ -29,6 +54,8 @@ const Login = () => {
               type="text"
               className="w-full bg-gray-200 placeholder:text-gray-500 text-black rounded-lg p-4 pe-12 text-sm shadow-sm"
               placeholder="Enter username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
         </div>
@@ -43,6 +70,8 @@ const Login = () => {
               type="password"
               className="w-full bg-gray-200 placeholder:text-gray-500 text-black rounded-lg p-4 pe-12 text-sm shadow-sm"
               placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
         </div>

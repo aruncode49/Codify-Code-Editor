@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -8,8 +8,16 @@ import {
 
 import { Home, Login, Signup, PageNotFound } from "./pages";
 import Layout from "./layout/Layout";
+import { updateAuthState } from "./utils/updateAuthState";
+import { useDispatch } from "react-redux";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    updateAuthState(dispatch);
+  }, []);
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
