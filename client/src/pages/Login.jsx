@@ -2,10 +2,10 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { SubmitButton } from "../components";
 import { validateForm } from "../utils/validation";
 import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoginState } from "../app/auth/authSlice";
+import { updateAuthState } from "../utils/updateAuthState";
 
 const Login = () => {
   const email = "xxxxx@gmail.com";
@@ -33,7 +33,7 @@ const Login = () => {
 
         if (res?.data?.success) {
           toast.success(res?.data?.message);
-          dispatch(setLoginState(true));
+          updateAuthState(dispatch);
           navigate("/code");
           console.log(res?.data?.user);
         }
