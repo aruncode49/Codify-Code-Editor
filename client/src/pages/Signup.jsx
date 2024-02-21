@@ -76,6 +76,7 @@ const Signup = () => {
             hoverColor={"hover:bg-blue-600"}
             px={"px-5"}
             py={"py-3"}
+            type={"submit"}
           />
         </div>
       </form>
