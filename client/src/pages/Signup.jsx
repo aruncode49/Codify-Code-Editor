@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { SubmitButton } from "../components";
 
 const Signup = () => {
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("login");
+  }
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-lg text-center">
@@ -64,12 +69,14 @@ const Signup = () => {
             </Link>
           </p>
 
-          <button
-            type="submit"
-            className="inline-block rounded-lg bg-blue-500 hover:bg-blue-600 px-5 py-3 text-sm font-medium text-white"
-          >
-            Register
-          </button>
+          <SubmitButton
+            handleSubmit={handleSubmit}
+            text={"Sign In"}
+            color={"bg-blue-500"}
+            hoverColor={"hover:bg-blue-600"}
+            px={"px-5"}
+            py={"py-3"}
+          />
         </div>
       </form>
     </div>
