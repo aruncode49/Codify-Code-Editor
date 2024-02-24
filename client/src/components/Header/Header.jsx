@@ -32,7 +32,7 @@ const Header = () => {
       <>
         <Link
           className="px-4 py-2 text-sm bg-blue-500  hover:bg-blue-600  rounded font-medium "
-          to="/login"
+          to="/compiler"
         >
           Get Started
         </Link>

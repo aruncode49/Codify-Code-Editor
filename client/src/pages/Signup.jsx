@@ -15,7 +15,7 @@ const Signup = () => {
 
   const isLogin = useSelector((state) => state.auth.isLogin);
   if (isLogin) {
-    return <Navigate to={"/code"} />;
+    return <Navigate to={"/compiler"} />;
   }
 
   async function handleSubmit(e) {

@@ -19,7 +19,7 @@ const Login = () => {
 
   // early return
   if (isLogin) {
-    return <Navigate to={"/code"} />;
+    return <Navigate to={"/compiler"} />;
   }
 
   async function handleSubmit(e) {
@@ -34,7 +34,7 @@ const Login = () => {
         if (res?.data?.success) {
           toast.success(res?.data?.message);
           updateAuthState(dispatch);
-          navigate("/code");
+          navigate("/compiler");
           console.log(res?.data?.user);
         }
       }
