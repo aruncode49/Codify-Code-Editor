@@ -19,7 +19,7 @@ const CodeEditor = () => {
     <CodeMirror
       value={value}
       height="100vh"
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%", fontSize: "14px" }}
       extensions={[loadLanguage("html")]}
       onChange={onChange}
       theme={draculaInit({

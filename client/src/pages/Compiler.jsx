@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SplitPane from "split-pane-react";
 import "split-pane-react/esm/themes/default.css";
 
-import { CodeEditor } from "../components";
+import { CodeEditor, EditorHeader } from "../components";
 
 const layoutCSS = {
   height: "100%",
@@ -18,7 +18,11 @@ const Compiler = () => {
     >
       <SplitPane split="vertical" sizes={sizes} onChange={setSizes}>
         {/* code editor */}
-        <div style={{ ...layoutCSS, background: "black" }}>
+        <div
+          className="flex flex-col "
+          style={{ ...layoutCSS, background: "black" }}
+        >
+          <EditorHeader />
           <CodeEditor />
         </div>
 
