@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import SplitPane, { Pane } from "split-pane-react";
+import SplitPane from "split-pane-react";
 import "split-pane-react/esm/themes/default.css";
+
+import { CodeEditor } from "../components";
 
 const layoutCSS = {
   height: "100%",
   display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
 };
 
 const Compiler = () => {
@@ -18,8 +18,8 @@ const Compiler = () => {
     >
       <SplitPane split="vertical" sizes={sizes} onChange={setSizes}>
         {/* code editor */}
-        <div className="" style={{ ...layoutCSS, background: "black" }}>
-          Code Editor
+        <div style={{ ...layoutCSS, background: "black" }}>
+          <CodeEditor />
         </div>
 
         {/* Iframe or code output */}
