@@ -6,10 +6,14 @@ import "./index.css";
 import store from "./app/appStore.js";
 import { Provider } from "react-redux";
 
+import { ThemeProvider } from "@/components/theme-provider";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeProvider defaultTheme="dark">
+        <App />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );
