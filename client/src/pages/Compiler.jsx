@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SplitPane from "split-pane-react";
 import "split-pane-react/esm/themes/default.css";
 
-import { CodeEditor, EditorHeader } from "../components";
+import { CodeEditor, EditorHeader, RenderCode } from "../components";
 
 const layoutCSS = {
   height: "100%",
@@ -27,10 +27,8 @@ const Compiler = () => {
         </div>
 
         {/* Iframe or code output */}
-        <div style={{ ...layoutCSS, background: "#a1a5a9" }}>
-          Iframe for code output Lorem ipsum dolor sit, amet consectetur
-          adipisicing elit. Modi maxime odit pariatur fugit porro error natus
-          nesciunt sequi sunt ullam?
+        <div style={{ ...layoutCSS, background: "#fff" }}>
+          <RenderCode />
         </div>
       </SplitPane>
     </div>

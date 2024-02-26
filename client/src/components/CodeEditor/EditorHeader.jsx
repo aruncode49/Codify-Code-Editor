@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Save, Share2, ChevronsUpDown } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { updateCurrentLanguage } from "../../app/code/codeSlice";
 
 const languages = ["html", "css", "javascript"];
 
@@ -7,8 +9,11 @@ const EditorHeader = () => {
   const [isSelectOpen, setSelectOpen] = useState(false);
   const [selectLanguage, setSelectLanguage] = useState("html");
 
+  const dispatch = useDispatch();
+
   function changeSelectLanguage(lang) {
     setSelectLanguage(lang);
+    dispatch(updateCurrentLanguage(lang));
     setSelectOpen((prev) => !prev);
   }
 
