@@ -10,7 +10,7 @@ const layoutCSS = {
 };
 
 const Compiler = () => {
-  const [sizes, setSizes] = useState([100, "10%", "auto"]);
+  const [sizes, setSizes] = useState([100, "5%", "auto"]);
   return (
     <div
       className="h-[calc(100vh - 64px)]"
