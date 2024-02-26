@@ -21,8 +21,12 @@ const CodeEditor = () => {
   return (
     <CodeMirror
       value={fullCode[currentLanguage]}
-      height="100vh"
-      style={{ width: "100%", height: "100%", fontSize: "14px" }}
+      height="100%"
+      style={{
+        width: "100%",
+        height: "100%",
+        fontSize: "16px",
+      }}
       extensions={[loadLanguage(currentLanguage)]}
       onChange={onChange}
       theme={draculaInit({

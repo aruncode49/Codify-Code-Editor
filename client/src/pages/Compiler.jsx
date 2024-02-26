@@ -1,37 +1,46 @@
-import React, { useState } from "react";
-import SplitPane from "split-pane-react";
-import "split-pane-react/esm/themes/default.css";
+import { useState, useEffect } from "react";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
 
 import { CodeEditor, EditorHeader, RenderCode } from "../components";
 
-const layoutCSS = {
-  height: "100%",
-  display: "flex",
-};
-
 const Compiler = () => {
-  const [sizes, setSizes] = useState([100, "5%", "auto"]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Adjust breakpoint as needed
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Call on initial render
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <div
-      className="h-[calc(100vh - 64px)]"
-      style={{ height: "calc(100vh - 64px)" }}
+    <ResizablePanelGroup
+      direction={isMobile ? "vertical" : "horizontal"}
+      className="h-full max-w-full border editor"
     >
-      <SplitPane split="vertical" sizes={sizes} onChange={setSizes}>
-        {/* code editor */}
-        <div
-          className="flex flex-col "
-          style={{ ...layoutCSS, background: "black" }}
-        >
+      <ResizablePanel defaultSize={90}>
+        <div className="h-full ">
           <EditorHeader />
           <CodeEditor />
         </div>
-
-        {/* Iframe or code output */}
-        <div style={{ ...layoutCSS, background: "#fff" }}>
+      </ResizablePanel>
+      <ResizableHandle withHandle className={"w-3 bg-black"} />
+      <ResizablePanel defaultSize={75}>
+        <div className="bg-white h-full">
           <RenderCode />
         </div>
-      </SplitPane>
-    </div>
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 };
 

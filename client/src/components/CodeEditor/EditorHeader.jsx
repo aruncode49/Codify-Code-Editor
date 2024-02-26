@@ -18,8 +18,8 @@ const EditorHeader = () => {
   }
 
   return (
-    <div className="h-16 p-3 px-4 flex items-center justify-between">
-      <div className="flex items-center gap-3">
+    <div className="bg-black w-full h-16 p-3 px-4 flex items-center justify-between">
+      <div className="flex items-center gap-3 ">
         <button className="flex items-center gap-1 px-2 py-1 bg-green-600 hover:bg-green-700 duration-100 rounded">
           <Save size={18} />
           Save
@@ -34,7 +34,7 @@ const EditorHeader = () => {
         <div className="inline-flex items-center overflow-hidden rounded-md border bg-white dark:border-gray-800 dark:bg-gray-900">
           <button
             onClick={() => setSelectOpen((prev) => !prev)}
-            className="flex items-center justify-between pl-4  w-[173px] text-sm h-full p-2 text-gray-600 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200 uppercase"
+            className="flex items-center justify-between pl-4 w-[140px] sm:w-44 text-sm h-full p-2 text-gray-600 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200 uppercase"
           >
             {selectLanguage}
             <ChevronsUpDown size={18} />
