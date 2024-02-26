@@ -11,6 +11,7 @@ const Login = () => {
   const email = "xxxxx@gmail.com";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Login = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
     try {
       if (validateForm(email, username, password)) {
         const res = await axios.post("/api/v1/auth/login", {
@@ -41,6 +43,8 @@ const Login = () => {
     } catch (error) {
       console.log(error?.response?.data?.message);
       toast.error(error?.response?.data?.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -98,7 +102,7 @@ const Login = () => {
 
           <SubmitButton
             handleSubmit={handleSubmit}
-            text={"Sign In"}
+            text={loading ? "Signing..." : "Sign In"}
             color={"bg-blue-500"}
             hoverColor={"hover:bg-blue-600"}
             px={"px-5"}

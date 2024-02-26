@@ -4,22 +4,45 @@ import { SubmitButton } from "../components";
 import { validateForm } from "../utils/validation";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateAuthState } from "@/utils/updateAuthState";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const isLogin = useSelector((state) => state.auth.isLogin);
   if (isLogin) {
     return <Navigate to={"/compiler"} />;
   }
 
+  async function loginUser() {
+    try {
+      const res = await axios.post("/api/v1/auth/login", {
+        username,
+        password,
+      });
+      if (res?.data?.success) {
+        toast.success("User registered successfully!");
+        updateAuthState(dispatch);
+        navigate("/compiler");
+        console.log(res?.data?.user);
+      }
+    } catch (error) {
+      return;
+    } finally {
+      return;
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
     try {
       if (validateForm(email, username, password)) {
         const res = await axios.post("/api/v1/auth/signup", {
@@ -29,13 +52,13 @@ const Signup = () => {
         });
 
         if (res?.data?.success) {
-          toast.success(res?.data?.message);
-          navigate("/login");
-          console.log(res?.data?.user);
+          loginUser();
         }
       }
     } catch (error) {
       toast.error(error?.response?.data?.error);
+    } finally {
+      setLoading(false);
     }
   }
   return (
@@ -108,7 +131,7 @@ const Signup = () => {
 
           <SubmitButton
             handleSubmit={handleSubmit}
-            text={"Register"}
+            text={loading ? "Registering..." : "Register"}
             color={"bg-blue-500"}
             hoverColor={"hover:bg-blue-600"}
             px={"px-5"}

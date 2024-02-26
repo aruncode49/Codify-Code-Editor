@@ -28,14 +28,14 @@ const Compiler = () => {
       direction={isMobile ? "vertical" : "horizontal"}
       className="h-full max-w-full border editor"
     >
-      <ResizablePanel defaultSize={90}>
+      <ResizablePanel defaultSize={55}>
         <div className="h-full ">
           <EditorHeader />
           <CodeEditor />
         </div>
       </ResizablePanel>
       <ResizableHandle withHandle className={"w-3 bg-black"} />
-      <ResizablePanel defaultSize={75}>
+      <ResizablePanel defaultSize={45}>
         <div className="bg-white h-full">
           <RenderCode />
         </div>
