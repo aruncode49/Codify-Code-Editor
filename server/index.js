@@ -44,6 +44,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // import routes
 import authRoutes from "./routes/auth.routes.js";
+import codeRoutes from "./routes/code.routes.js";
 
 app.get("/", (req, res) => {
   console.log(req.isAuthenticated());
@@ -51,6 +52,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/code", codeRoutes);
 
 app.get("/test", async (req, res) => {
   // const fakeCode = new Code({

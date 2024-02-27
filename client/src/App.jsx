@@ -32,6 +32,10 @@ const App = () => {
           path="/compiler"
           element={isLogin ? <Compiler /> : <Navigate to={"/login"} />}
         />
+        <Route
+          path="/compiler/:codeId"
+          element={isLogin ? <Compiler /> : <Navigate to={"/login"} />}
+        />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     )
