@@ -3,6 +3,9 @@ import { Save, Share2, ChevronsUpDown } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { updateCurrentLanguage } from "../../app/code/codeSlice";
 
+import { DialogTrigger } from "@/components/ui/dialog";
+import { SaveDialog } from "./SaveDialog";
+
 const languages = ["html", "css", "javascript"];
 
 const EditorHeader = () => {
@@ -20,10 +23,15 @@ const EditorHeader = () => {
   return (
     <div className="bg-black w-full h-16 p-3 px-4 flex items-center justify-between">
       <div className="flex items-center gap-3 ">
-        <button className="flex items-center gap-1 px-2 py-1 bg-green-600 hover:bg-green-700 duration-100 rounded">
-          <Save size={18} />
-          Save
-        </button>
+        <SaveDialog>
+          <DialogTrigger asChild>
+            <button className="flex items-center gap-1 px-2 py-1 bg-green-600 hover:bg-green-700 duration-100 rounded">
+              <Save size={18} />
+              Save
+            </button>
+          </DialogTrigger>
+        </SaveDialog>
+
         <button className="flex items-center gap-1 px-2 py-1 bg-blue-500 hover:bg-blue-600 duration-100 rounded">
           <Share2 size={18} />
           Share
