@@ -21,10 +21,9 @@ const CodeEditor = () => {
   return (
     <CodeMirror
       value={fullCode[currentLanguage]}
-      height="100%"
+      height="calc(100vh - 130px)"
       style={{
         width: "100%",
-        height: "100%",
         fontSize: "16px",
       }}
       extensions={[loadLanguage(currentLanguage)]}

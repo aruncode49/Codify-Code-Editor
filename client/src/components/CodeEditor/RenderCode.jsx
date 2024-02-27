@@ -17,7 +17,7 @@ const RenderCode = () => {
   )}`;
 
   return (
-    <div style={{ width: "100%" }} className="h-full">
+    <div style={{ width: "100%", height: "calc(100vh - 68px)" }} className="">
       <iframe className="h-full w-full" src={iframeContent} />
     </div>
   );
