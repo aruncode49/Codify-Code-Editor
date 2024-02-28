@@ -2,51 +2,29 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   fullCode: {
-    html: `<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Basic Example</title>
-<link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-
-<div class="container">
-  <button id="myButton">Click me!</button>
-  <p id="output"></p>
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
-    `,
-    css: `body {
-  font-family: Arial, sans-serif;
-}
-
-.container {
-  text-align: center;
-  margin-top: 100px;
+    html: `<button>Click Here</button>`,
+    css: `body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lightyellow;
 }
 
 button{
+  outline: none;
+  border: none;
+  background-color: lightblue;
   padding: 1rem 2rem;
-  font-size: 2rem;
-  border-radius: 1rem;
-  background: lightblue;
+  font-size: 1.5rem;
+  border-radius: 5px;
   cursor: pointer;
-  margin-top: 100px;
-  
-}
-
-#output {
-  font-size: 24px;
-  color: blue;
+  font-weight: bold;
+  color: white;
 }
     `,
-    javascript: `document.getElementById("myButton").addEventListener("click", function() {
-  document.getElementById("output").innerText = "Hello, world!";
+    javascript: `document.querySelector("button").addEventListener("click", function() {
+  var randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+  this.style.backgroundColor = randomColor;
 });
     `,
   },

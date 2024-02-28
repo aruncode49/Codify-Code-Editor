@@ -40,8 +40,6 @@ async function getFullCodeController(req, res) {
   try {
     const { codeId } = req.params;
 
-    console.log(codeId);
-
     const data = await Code.findById(codeId);
     if (!data) {
       return res.status(401).json({
@@ -55,6 +53,7 @@ async function getFullCodeController(req, res) {
       success: true,
       message: "Code found successfully",
       fullCode: data?.fullCode,
+      owner: data?.owner,
     });
   } catch (error) {
     return res.status(500).json({

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { draculaInit } from "@uiw/codemirror-theme-dracula";
 import { tags as t } from "@lezer/highlight";
@@ -26,7 +26,6 @@ const CodeEditor = () => {
         width: "100%",
         fontSize: "16px",
       }}
-      editable={true} // change for the diffrent user
       extensions={[loadLanguage(currentLanguage)]}
       onChange={onChange}
       theme={draculaInit({
