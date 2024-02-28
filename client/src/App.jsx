@@ -20,7 +20,7 @@ const App = () => {
 
   useEffect(() => {
     updateAuthState(dispatch);
-  }, [isLogin]);
+  }, []);
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -28,14 +28,7 @@ const App = () => {
         <Route path="" element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
-        <Route
-          path="/compiler"
-          element={isLogin ? <Compiler /> : <Navigate to={"/login"} />}
-        />
-        <Route
-          path="/compiler/:codeId"
-          element={isLogin ? <Compiler /> : <Navigate to={"/login"} />}
-        />
+        <Route path="compiler/:codeId?" element={<Compiler />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     )

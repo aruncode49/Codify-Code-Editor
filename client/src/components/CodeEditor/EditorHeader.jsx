@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { Save, Share2, ChevronsUpDown } from "lucide-react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentLanguage } from "../../app/code/codeSlice";
 
 import { DialogTrigger } from "@/components/ui/dialog";
 import { SaveDialog } from "./SaveDialog";
+import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 const languages = ["html", "css", "javascript"];
 
 const EditorHeader = () => {
   const [isSelectOpen, setSelectOpen] = useState(false);
   const [selectLanguage, setSelectLanguage] = useState("html");
+  const isLogin = useSelector((state) => state.auth.isLogin);
+  const { codeId } = useParams();
+  console.log(codeId);
 
   const dispatch = useDispatch();
 
@@ -25,17 +30,25 @@ const EditorHeader = () => {
       <div className="flex items-center gap-3 ">
         <SaveDialog>
           <DialogTrigger asChild>
-            <button className="flex items-center gap-1 px-2 py-1 bg-green-600 hover:bg-green-700 duration-100 rounded">
+            <button
+              onClick={() => {
+                if (!isLogin)
+                  return toast.error("Please login to save the code!");
+              }}
+              className="flex items-center gap-1 px-2 py-1 bg-green-600 hover:bg-green-700 duration-100 rounded"
+            >
               <Save size={18} />
               Save
             </button>
           </DialogTrigger>
         </SaveDialog>
 
-        <button className="flex items-center gap-1 px-2 py-1 bg-blue-500 hover:bg-blue-600 duration-100 rounded">
-          <Share2 size={18} />
-          Share
-        </button>
+        {codeId && (
+          <button className="flex items-center gap-1 px-2 py-1 bg-blue-500 hover:bg-blue-600 duration-100 rounded">
+            <Share2 size={18} />
+            Share
+          </button>
+        )}
       </div>
 
       <div className="relative">

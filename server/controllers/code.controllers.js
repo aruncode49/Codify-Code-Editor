@@ -38,7 +38,7 @@ async function saveCodeController(req, res) {
 
 async function getFullCodeController(req, res) {
   try {
-    const { codeId } = req.body;
+    const { codeId } = req.params;
 
     console.log(codeId);
 

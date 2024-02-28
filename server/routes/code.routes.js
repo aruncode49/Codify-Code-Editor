@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/save", isLogin, saveCodeController);
 
-router.post("/get-code/", isLogin, getFullCodeController);
+router.get("/load/:codeId", isLogin, getFullCodeController);
 
 export default router;
