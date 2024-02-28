@@ -1,14 +1,17 @@
 import Logo from "./Logo";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { SubmitButton } from "../index";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { removeUser } from "../../app/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLogin = useSelector((state) => state.auth.isLogin);
+  const location = useLocation();
+  const path = location.pathname;
 
   async function handleLogout() {
     try {
@@ -29,18 +32,38 @@ const Header = () => {
         <Logo />
       </Link>
 
-      <>
-        <Link
-          className="px-4 py-2 text-sm bg-blue-500  hover:bg-blue-600  rounded font-medium "
-          to="/compiler"
-        >
-          Get Started
-        </Link>
+      <div className="flex items-center gap-3">
+        {path !== "/compiler" && (
+          <Link
+            className="px-3 py-2 text-sm bg-blue-500  hover:bg-blue-600  rounded font-medium "
+            to="/compiler"
+          >
+            Compiler
+          </Link>
+        )}
+
+        {!isLogin && (
+          <Link
+            className="px-3 py-2 sm:px-5 text-sm  bg-blue-500  hover:bg-blue-600 rounded font-medium "
+            to="/login"
+          >
+            Login
+          </Link>
+        )}
 
         {/* logut button */}
 
-        <SubmitButton handleSubmit={handleLogout} text={"Logout"} />
-      </>
+        {isLogin && (
+          <SubmitButton
+            color={"bg-red-500"}
+            hoverColor={"hover:bg-red-600"}
+            px={"px-3 sm:px-4"}
+            py={"py-2"}
+            handleSubmit={handleLogout}
+            text={"Logout"}
+          />
+        )}
+      </div>
     </div>
   );
 };

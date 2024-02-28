@@ -15,7 +15,6 @@ const EditorHeader = () => {
   const [selectLanguage, setSelectLanguage] = useState("html");
   const isLogin = useSelector((state) => state.auth.isLogin);
   const { codeId } = useParams();
-  console.log(codeId);
 
   const dispatch = useDispatch();
 

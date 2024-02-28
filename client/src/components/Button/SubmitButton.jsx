@@ -12,7 +12,7 @@ const SubmitButton = ({
   return (
     <button
       onClick={handleSubmit}
-      className={`inline-block rounded-lg ${color} ${hoverColor} ${px} ${py} text-sm font-medium text-white`}
+      className={`inline-block rounded ${color} ${hoverColor} ${px} ${py} text-sm font-medium text-white`}
       type={type}
     >
       {text}
