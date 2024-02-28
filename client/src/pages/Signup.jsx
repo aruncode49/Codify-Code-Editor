@@ -6,6 +6,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAuthState } from "@/utils/updateAuthState";
+import { Loader2 } from "lucide-react";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -131,7 +132,7 @@ const Signup = () => {
 
           <SubmitButton
             handleSubmit={handleSubmit}
-            text={loading ? "Registering..." : "Register"}
+            text={loading ? <Loader2 className="animate-spin" /> : "Register"}
             color={"bg-blue-500"}
             hoverColor={"hover:bg-blue-600"}
             px={"px-5"}

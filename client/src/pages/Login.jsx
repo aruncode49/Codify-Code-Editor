@@ -6,6 +6,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAuthState } from "../utils/updateAuthState";
+import { Loader2 } from "lucide-react";
 
 const Login = () => {
   const email = "xxxxx@gmail.com";
@@ -37,7 +38,6 @@ const Login = () => {
           toast.success(res?.data?.message);
           updateAuthState(dispatch);
           navigate("/compiler");
-          console.log(res?.data?.user);
         }
       }
     } catch (error) {
@@ -102,7 +102,7 @@ const Login = () => {
 
           <SubmitButton
             handleSubmit={handleSubmit}
-            text={loading ? "Signing..." : "Sign In"}
+            text={loading ? <Loader2 className="animate-spin" /> : "Sign In"}
             color={"bg-blue-500"}
             hoverColor={"hover:bg-blue-600"}
             px={"px-5"}

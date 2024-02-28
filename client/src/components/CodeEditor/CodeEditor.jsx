@@ -26,6 +26,7 @@ const CodeEditor = () => {
         width: "100%",
         fontSize: "16px",
       }}
+      editable={true} // change for the diffrent user
       extensions={[loadLanguage(currentLanguage)]}
       onChange={onChange}
       theme={draculaInit({
