@@ -6,10 +6,13 @@ import toast from "react-hot-toast";
 import { removeUser } from "../../app/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+import { ProfileDropdown } from "./ProfileDropdown";
+
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLogin = useSelector((state) => state.auth.isLogin);
+  const user = useSelector((state) => state.auth.user);
   const location = useLocation();
   const path = location.pathname;
 
@@ -51,18 +54,14 @@ const Header = () => {
           </Link>
         )}
 
-        {/* logut button */}
-
-        {isLogin && (
-          <SubmitButton
-            color={"bg-red-500"}
-            hoverColor={"hover:bg-red-600"}
-            px={"px-3 sm:px-4"}
-            py={"py-2"}
-            handleSubmit={handleLogout}
-            text={"Logout"}
-          />
-        )}
+        <div className="mr-2 sm:mr-0">
+          {isLogin && (
+            <ProfileDropdown
+              handleLogout={handleLogout}
+              username={user?.username}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
