@@ -2,7 +2,7 @@ import express from "express";
 import { isLogin } from "../middlewares/auth.middleware.js";
 import {
   getFullCodeController,
-  getMyCodeController,
+  getSavedCodeController,
   saveCodeController,
 } from "../controllers/code.controllers.js";
 
@@ -12,6 +12,6 @@ router.post("/save", isLogin, saveCodeController);
 
 router.get("/load/:codeId", isLogin, getFullCodeController);
 
-router.get("/my-code", isLogin, getMyCodeController);
+router.get("/saved", isLogin, getSavedCodeController);
 
 export default router;

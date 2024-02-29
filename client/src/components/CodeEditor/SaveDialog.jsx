@@ -30,7 +30,6 @@ export function SaveDialog({ children }) {
 
       if (res?.data?.success) {
         toast.success(res.data.message);
-        console.log(res.data);
         navigate(`/compiler/${res.data.codeId}`);
       }
     } catch (error) {

@@ -7,7 +7,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import { Home, Login, Signup, PageNotFound, Compiler, MyCode } from "./pages";
+import {
+  Home,
+  Login,
+  Signup,
+  PageNotFound,
+  Compiler,
+  SavedCode,
+} from "./pages";
 import Layout from "./layout/Layout";
 import { updateAuthState } from "./utils/updateAuthState";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +34,7 @@ const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="compiler/:codeId?" element={<Compiler />} />
-        <Route path="my-code" element={<MyCode />} />
+        <Route path="saved" element={<SavedCode />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     )

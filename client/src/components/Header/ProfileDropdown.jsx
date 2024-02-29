@@ -5,7 +5,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu";
 import { Code, LogOut, User } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -28,16 +27,16 @@ export function ProfileDropdown({ username, handleLogout }) {
         <DropdownMenuSeparator />
         <div className="flex flex-col justify-center items-center text-sm pb-1">
           <Link
-            to="/my-code"
-            className=" w-full pl-3 py-2 hover:bg-slate-800 hover:text-green-500  flex items-center  gap-1 rounded-lg duration-100"
+            to="/saved"
+            className=" w-full pl-3 py-2 hover:bg-slate-800 hover:text-green-500  flex items-center  gap-2 rounded-lg duration-100"
           >
             <Code size={18} />
-            My Code
+            Saved
           </Link>
 
           <button
             onClick={handleLogout}
-            className=" w-full pl-3 py-2 hover:bg-slate-800 hover:text-red-500 flex items-center gap-1 rounded-lg duration-100"
+            className=" w-full pl-3 py-2 hover:bg-slate-800 hover:text-red-500 flex items-center gap-2 rounded-lg duration-100"
           >
             <LogOut size={18} />
             Logout

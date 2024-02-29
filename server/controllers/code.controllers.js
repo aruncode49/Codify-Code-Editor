@@ -64,7 +64,7 @@ async function getFullCodeController(req, res) {
   }
 }
 
-async function getMyCodeController(req, res) {
+async function getSavedCodeController(req, res) {
   try {
     const userId = req?.user?._id;
     const allCode = await Code.find({ owner: userId }).sort({ createdAt: -1 });
@@ -82,4 +82,4 @@ async function getMyCodeController(req, res) {
   }
 }
 
-export { saveCodeController, getFullCodeController, getMyCodeController };
+export { saveCodeController, getFullCodeController, getSavedCodeController };
