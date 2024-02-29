@@ -64,4 +64,22 @@ async function getFullCodeController(req, res) {
   }
 }
 
-export { saveCodeController, getFullCodeController };
+async function getMyCodeController(req, res) {
+  try {
+    const userId = req?.user?._id;
+    const allCode = await Code.find({ owner: userId }).sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      success: true,
+      allCode,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Code not found",
+      error: error.message,
+    });
+  }
+}
+
+export { saveCodeController, getFullCodeController, getMyCodeController };
