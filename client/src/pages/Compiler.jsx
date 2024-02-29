@@ -18,7 +18,6 @@ const Compiler = () => {
   const navigate = useNavigate();
 
   const { codeId } = useParams();
-  if (codeId) console.log(codeId);
 
   async function loadCode(codeId) {
     try {

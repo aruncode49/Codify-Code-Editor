@@ -16,8 +16,6 @@ const App = () => {
   const dispatch = useDispatch();
   const isLogin = useSelector((state) => state.auth.isLogin);
 
-  console.log(isLogin);
-
   useEffect(() => {
     updateAuthState(dispatch);
   }, []);
