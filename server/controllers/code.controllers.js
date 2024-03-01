@@ -36,6 +36,42 @@ async function saveCodeController(req, res) {
   }
 }
 
+async function editCodeController(req, res) {
+  try {
+    const { fullCode, title } = req.body;
+    const { codeId } = req.params;
+
+    if (
+      fullCode.html === "" &&
+      fullCode.css === "" &&
+      fullCode.javascript === ""
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Code can not be blank!",
+      });
+    }
+
+    const data = await Code.findByIdAndUpdate(codeId, {
+      fullCode,
+      title,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Code edit successfully",
+      codeId: data?._id,
+      ownerId: data?.owner,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error in code editing",
+      error: error.message,
+    });
+  }
+}
+
 async function getFullCodeController(req, res) {
   try {
     const { codeId } = req.params;
@@ -82,4 +118,9 @@ async function getSavedCodeController(req, res) {
   }
 }
 
-export { saveCodeController, getFullCodeController, getSavedCodeController };
+export {
+  saveCodeController,
+  getFullCodeController,
+  getSavedCodeController,
+  editCodeController,
+};

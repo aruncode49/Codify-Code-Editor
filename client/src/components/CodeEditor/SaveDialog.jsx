@@ -10,9 +10,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { updateCodeDetails, updateIsEditable } from "@/app/code/codeSlice";
 
 export function SaveDialog({ children }) {
   const [title, setTitle] = useState("");
@@ -21,6 +22,7 @@ export function SaveDialog({ children }) {
   const isEditable = useSelector((state) => state.code.isEditable);
   const codeDetails = useSelector((state) => state.code.codeDetails);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   async function handleSaveCode() {
     if (title == "") return toast.error("Please add a title!");
@@ -40,7 +42,22 @@ export function SaveDialog({ children }) {
   }
 
   async function handleEditCode() {
-    toast.success("helo edit");
+    if (title == "") return toast.error("Please add a title!");
+    try {
+      const res = await axios.put(`/api/v1/code/edit/${codeDetails._id}`, {
+        fullCode,
+        title,
+      });
+
+      if (res?.data?.success) {
+        toast.success(res.data.message);
+        navigate(`/compiler/${res.data.codeId}`);
+        dispatch(updateIsEditable(false));
+        dispatch(updateCodeDetails(null));
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   }
 
   useEffect(() => {

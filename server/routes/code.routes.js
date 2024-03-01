@@ -1,6 +1,7 @@
 import express from "express";
 import { isLogin } from "../middlewares/auth.middleware.js";
 import {
+  editCodeController,
   getFullCodeController,
   getSavedCodeController,
   saveCodeController,
@@ -9,6 +10,8 @@ import {
 const router = express.Router();
 
 router.post("/save", isLogin, saveCodeController);
+
+router.put("/edit/:codeId", isLogin, editCodeController);
 
 router.get("/load/:codeId", isLogin, getFullCodeController);
 
