@@ -1,30 +1,30 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect, startTransition } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Navigate,
   Route,
   RouterProvider,
 } from "react-router-dom";
 
-import {
-  Home,
-  Login,
-  Signup,
-  PageNotFound,
-  Compiler,
-  SavedCode,
-} from "./pages";
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/Login"));
+const Signup = lazy(() => import("./pages/Signup"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+const Compiler = lazy(() => import("./pages/Compiler"));
+const SavedCode = lazy(() => import("./pages/SavedCode"));
+
 import Layout from "./layout/Layout";
 import { updateAuthState } from "./utils/updateAuthState";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import Loader from "./components/Loader/Loader";
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLogin = useSelector((state) => state.auth.isLogin);
 
   useEffect(() => {
-    updateAuthState(dispatch);
+    startTransition(() => {
+      updateAuthState(dispatch);
+    });
   }, []);
 
   const router = createBrowserRouter(
@@ -40,7 +40,17 @@ const App = () => {
     )
   );
 
-  return <RouterProvider router={router} />;
+  return (
+    <Suspense
+      fallback={
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <Loader /> {/* Render your loading indicator */}
+        </div>
+      }
+    >
+      <RouterProvider router={router} />
+    </Suspense>
+  );
 };
 
 export default App;
