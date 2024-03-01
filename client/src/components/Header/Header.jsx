@@ -38,7 +38,7 @@ const Header = () => {
       <div className="flex items-center gap-3">
         {path !== "/compiler" && (
           <Link
-            className="px-3 py-2 text-sm bg-blue-500  hover:bg-blue-600  rounded font-medium "
+            className="px-3 py-2 text-sm bg-purple-700  hover:bg-purple-800  rounded font-medium "
             to="/compiler"
           >
             Compiler
@@ -47,7 +47,7 @@ const Header = () => {
 
         {!isLogin && (
           <Link
-            className="px-3 py-2 sm:px-5 text-sm  bg-blue-500  hover:bg-blue-600 rounded font-medium "
+            className="px-3 py-2 sm:px-5 text-sm  bg-purple-700  hover:bg-purple-800  rounded font-medium "
             to="/login"
           >
             Login

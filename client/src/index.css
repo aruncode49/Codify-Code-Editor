@@ -17,8 +17,15 @@
 
 body {
   font-family: "Outfit", sans-serif;
-  background-color: #0f172a;
+  /* background-color: #0f172a; */
+  background: linear-gradient(to bottom right, #211a5b, #010103, #3a0f4a);
+  background-repeat: no-repeat;
   color: #ffff;
+}
+
+.background {
+  background: linear-gradient(to bottom right, #211a5b, #010103, #3a0f4a);
+  background-repeat: no-repeat;
 }
 
 @layer base {

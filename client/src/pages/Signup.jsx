@@ -32,7 +32,6 @@ const Signup = () => {
         toast.success("User registered successfully!");
         updateAuthState(dispatch);
         navigate("/compiler");
-        console.log(res?.data?.user);
       }
     } catch (error) {
       return;
@@ -63,7 +62,7 @@ const Signup = () => {
     }
   }
   return (
-    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 fullscreen">
       <div className="mx-auto max-w-lg text-center">
         <h1 className="text-2xl font-bold sm:text-3xl">Create Account</h1>
 
@@ -133,8 +132,8 @@ const Signup = () => {
           <SubmitButton
             handleSubmit={handleSubmit}
             text={loading ? <Loader2 className="animate-spin" /> : "Register"}
-            color={"bg-blue-500"}
-            hoverColor={"hover:bg-blue-600"}
+            color={"bg-purple-700"}
+            hoverColor={"hover:bg-purple-800 "}
             px={"px-5"}
             py={"py-3"}
             type={"submit"}

@@ -41,7 +41,6 @@ const Login = () => {
         }
       }
     } catch (error) {
-      console.log(error?.response?.data?.message);
       toast.error(error?.response?.data?.message);
     } finally {
       setLoading(false);
@@ -49,7 +48,7 @@ const Login = () => {
   }
 
   return (
-    <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-screen-xl fullscreen  px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-lg text-center">
         <h1 className="text-2xl font-bold sm:text-3xl">Sign In</h1>
 
@@ -103,8 +102,8 @@ const Login = () => {
           <SubmitButton
             handleSubmit={handleSubmit}
             text={loading ? <Loader2 className="animate-spin" /> : "Sign In"}
-            color={"bg-blue-500"}
-            hoverColor={"hover:bg-blue-600"}
+            color={"bg-purple-700"}
+            hoverColor={"hover:bg-purple-800"}
             px={"px-5"}
             py={"py-3"}
             type={"submit"}
