@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,6 +18,8 @@ export function SaveDialog({ children }) {
   const [title, setTitle] = useState("");
   const fullCode = useSelector((state) => state.code.fullCode);
   const isLogin = useSelector((state) => state.auth.isLogin);
+  const isEditable = useSelector((state) => state.code.isEditable);
+  const codeDetails = useSelector((state) => state.code.codeDetails);
   const navigate = useNavigate();
 
   async function handleSaveCode() {
@@ -37,13 +39,23 @@ export function SaveDialog({ children }) {
     }
   }
 
+  async function handleEditCode() {
+    toast.success("helo edit");
+  }
+
+  useEffect(() => {
+    if (codeDetails) {
+      setTitle(codeDetails.title);
+    }
+  }, []);
+
   return (
     <Dialog>
       {children}
       {isLogin && (
         <DialogContent className="sm:max-w-md rounded-lg bg-slate-900 py-8 pb-9  ">
           <DialogHeader>
-            <DialogTitle>Add Title</DialogTitle>
+            <DialogTitle>{isEditable ? "Edit Title" : "Add Title"}</DialogTitle>
           </DialogHeader>
           <div className="flex items-center space-x-3 mt-2">
             <div className="grid flex-1 gap-2">
@@ -58,12 +70,12 @@ export function SaveDialog({ children }) {
             </div>
             <DialogClose asChild>
               <Button
-                onClick={handleSaveCode}
+                onClick={isEditable ? handleEditCode : handleSaveCode}
                 type="submit"
                 size="sm"
                 className="px-3"
               >
-                Save
+                {isEditable ? "Edit" : "Save"}
               </Button>
             </DialogClose>
           </div>

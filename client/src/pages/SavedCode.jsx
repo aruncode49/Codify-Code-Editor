@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import { Edit, Loader2, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateCodeDetails, updateIsEditable } from "@/app/code/codeSlice";
 
 const SavedCode = () => {
   const [allCode, setAllCode] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   async function getSavedCode() {
     try {
@@ -21,6 +28,24 @@ const SavedCode = () => {
     }
   }
 
+  function handleEditCode(code) {
+    try {
+      const codeDetails = {
+        title: code?.title,
+        _id: code?._id,
+      };
+
+      dispatch(updateIsEditable(true));
+      dispatch(updateCodeDetails(codeDetails));
+
+      navigate(`/compiler/${code?._id}`);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  console.log(allCode);
+
   useEffect(() => {
     getSavedCode();
   }, []);
@@ -32,7 +57,10 @@ const SavedCode = () => {
           <div className="bg-gray-700 p-4 rounded m-2" key={code?._id}>
             <h1 className="text-gray-200 text-sm">{code?.title}</h1>
             <div className="flex items-center gap-3 mt-3">
-              <button className="flex items-center gap-1 px-2 py-1 bg-blue-500 text-gray-300 hover:text-white rounded text-sm">
+              <button
+                onClick={() => handleEditCode(code)}
+                className="flex items-center gap-1 px-2 py-1 bg-blue-500 text-gray-300 hover:text-white rounded text-sm"
+              >
                 <Edit size={13} />
                 Edit
               </button>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Save, Share2, ChevronsUpDown, Download } from "lucide-react";
+import { Save, Share2, ChevronsUpDown, Download, Edit } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCurrentLanguage } from "../../app/code/codeSlice";
 
@@ -20,6 +20,7 @@ const EditorHeader = () => {
 
   const dispatch = useDispatch();
   const fullCode = useSelector((state) => state.code.fullCode);
+  const isEditable = useSelector((state) => state.code.isEditable);
 
   function handleDownloadCode() {
     downloadCodeFiles(fullCode);
@@ -43,8 +44,8 @@ const EditorHeader = () => {
               }}
               className="flex items-center gap-1 px-2 text-sm sm:text-base sm:px-2 py-1 bg-green-600 hover:bg-green-700 duration-100 rounded"
             >
-              <Save size={18} />
-              Save
+              {isEditable ? <Edit size={18} /> : <Save size={18} />}
+              {isEditable ? "Edit" : "Save"}
             </button>
           </DialogTrigger>
         </SaveDialog>
