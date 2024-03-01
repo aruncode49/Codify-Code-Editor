@@ -3,12 +3,18 @@ import axios from "axios";
 
 import { Edit, Loader2, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateCodeDetails, updateIsEditable } from "@/app/code/codeSlice";
+
+import { AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { AlertModal } from "@/components";
+import toast from "react-hot-toast";
 
 const SavedCode = () => {
   const [allCode, setAllCode] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   const dispatch = useDispatch();
 
@@ -44,7 +50,24 @@ const SavedCode = () => {
     }
   }
 
-  console.log(allCode);
+  async function handleDeleteCode(code) {
+    try {
+      const res = await axios.delete(`/api/v1/code/delete/${code._id}`);
+      if (res?.data?.success) {
+        toast.success(res?.data?.message);
+        getSavedCode();
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  }
+
+  useEffect(() => {
+    if (!isLogin) {
+      navigate("/login");
+      toast.error("Please login to proceed!");
+    }
+  }, []);
 
   useEffect(() => {
     getSavedCode();
@@ -64,10 +87,14 @@ const SavedCode = () => {
                 <Edit size={13} />
                 Edit
               </button>
-              <button className="flex items-center gap-1 px-2 py-1 bg-red-600 text-gray-300 hover:text-white rounded text-sm">
-                <Trash2 size={14} />
-                Delete
-              </button>
+              <AlertModal handleDeleteCode={() => handleDeleteCode(code)}>
+                <AlertDialogTrigger asChild>
+                  <button className="flex items-center gap-1 px-2 py-1 bg-red-600 text-gray-300 hover:text-white rounded text-sm">
+                    <Trash2 size={14} />
+                    Delete
+                  </button>
+                </AlertDialogTrigger>
+              </AlertModal>
             </div>
           </div>
         ))}
@@ -88,11 +115,3 @@ const SavedCode = () => {
 };
 
 export default SavedCode;
-
-/**
- * 
- * 
- * <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <Loader2 size={50} className="animate-spin" />
-    </div>
- */

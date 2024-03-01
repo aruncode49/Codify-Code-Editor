@@ -72,6 +72,32 @@ async function editCodeController(req, res) {
   }
 }
 
+async function deleteCodeController(req, res) {
+  try {
+    const { codeId } = req.params;
+
+    const data = await Code.findByIdAndDelete(codeId);
+    if (!data) {
+      return res.status(401).json({
+        success: false,
+        message: "Something went wrong!",
+        error: error.message,
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Code delete successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong!",
+      error: error.message,
+    });
+  }
+}
+
 async function getFullCodeController(req, res) {
   try {
     const { codeId } = req.params;
@@ -123,4 +149,5 @@ export {
   getFullCodeController,
   getSavedCodeController,
   editCodeController,
+  deleteCodeController,
 };
