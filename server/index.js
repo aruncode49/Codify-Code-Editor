@@ -4,18 +4,31 @@ import cors from "cors";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 
 import { connectDB } from "./db/connect.js";
 import { User } from "./models/user.model.js";
-import { Code } from "./models/code.model.js";
 
 dotenv.config();
 
 const app = express();
 const PORT = 8080;
 
+const store = MongoStore.create({
+  mongoUrl: process.env.MONGODB_URI,
+  crypto: {
+    secret: process.env.SESSION_SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error", (err) => {
+  console.log("Error inside MONGO SESSION STORE: ", err);
+});
+
 // session options
 const sessionOptions = {
+  store,
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
@@ -54,24 +67,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/code", codeRoutes);
-
-app.get("/test", async (req, res) => {
-  // const fakeCode = new Code({
-  //   code: {
-  //     html: `<h1>Hello World</h1>`,
-  //     css: `h1: {color: "red"}`,
-  //     javascript: `console.log("Hello world")`,
-  //   },
-  //   owner: "65d32d1090bfb01d7af5caeb",
-  // });
-
-  // const insertedCode = await fakeCode.save();
-
-  // res.send(insertedCode);
-
-  // console.log(req.user);
-  res.send("hello");
-});
 
 function startServer() {
   try {
