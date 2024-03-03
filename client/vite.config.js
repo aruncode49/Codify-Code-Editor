@@ -6,7 +6,7 @@ import path from "path";
 export default defineConfig({
   server: {
     proxy: {
-      "/api/v1": "http://localhost:8080",
+      "/api/v1": "https://codify-editor.onrender.com/",
     },
   },
   plugins: [react()],
