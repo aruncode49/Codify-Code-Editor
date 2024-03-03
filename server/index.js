@@ -71,7 +71,7 @@ app.use("/api/v1/code", codeRoutes);
 function startServer() {
   try {
     connectDB(process.env.MONGODB_URI);
-    app.listen(PORT, () => {
+    app.listen(process.env.PORT, () => {
       console.log(`Server start on port: ${PORT}`);
     });
   } catch (error) {
