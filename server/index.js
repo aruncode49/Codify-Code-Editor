@@ -26,13 +26,10 @@ const sessionOptions = {
   },
 };
 
-app.use(
-  cors({
-    origin: "https://codifyeditor.netlify.app",
-  })
-);
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("dist"));
 app.use(session(sessionOptions));
 
 // initialize passport and use passport session (** NOTE -> express-session is must for using passport local strategy)

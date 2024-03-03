@@ -1,0 +1,1 @@
+import{j as e}from"./index-D8Ssnc39.js";const a=()=>e.jsx("div",{className:"flex justify-center items-center min-h-[calc(100vh-64px)] text-primary text-3xl",children:"Page nhi mila bhai 🥹"});export{a as default};
