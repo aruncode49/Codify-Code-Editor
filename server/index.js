@@ -26,7 +26,11 @@ const sessionOptions = {
   },
 };
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://codifyeditor.netlify.app",
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session(sessionOptions));
