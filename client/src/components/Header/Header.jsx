@@ -1,6 +1,5 @@
 import Logo from "./Logo";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { SubmitButton } from "../index";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { removeUser } from "../../app/auth/authSlice";
@@ -17,7 +16,9 @@ const Header = () => {
   const path = location.pathname;
 
   async function handleLogout() {
+    let toastId = null;
     try {
+      toastId = toast.loading("Logging out...");
       const res = await axios.get("/api/v1/auth/logout");
       if (res?.data?.success) {
         toast.success("User logout successfully");
@@ -26,6 +27,8 @@ const Header = () => {
       }
     } catch (error) {
       console.log(error.message);
+    } finally {
+      if (toastId) toast.dismiss(toastId);
     }
   }
 
@@ -35,10 +38,10 @@ const Header = () => {
         <Logo />
       </Link>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 -mr-2 sm:-mr-0">
         {path !== "/compiler" && (
           <Link
-            className="px-3 py-2 text-sm bg-purple-700  hover:bg-purple-800  rounded font-medium "
+            className="px-3 py-2 text-sm bg-[#2D9596]  hover:bg-[#237172]  rounded font-medium "
             to="/compiler"
           >
             Compiler
@@ -47,7 +50,7 @@ const Header = () => {
 
         {!isLogin && (
           <Link
-            className="px-3 py-2 sm:px-5 text-sm  bg-purple-700  hover:bg-purple-800  rounded font-medium "
+            className="px-3 py-2 sm:px-5 text-sm text-black  bg-[#F1FADA]  hover:bg-[#cfdeab]  rounded font-medium "
             to="/login"
           >
             Login

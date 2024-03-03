@@ -42,7 +42,7 @@ const EditorHeader = () => {
                 if (!isLogin)
                   return toast.error("Please login to save the code!");
               }}
-              className="flex items-center gap-1 px-2 text-sm sm:text-base sm:px-2 py-1 bg-purple-700 hover:bg-purple-800 duration-100 rounded"
+              className="flex items-center gap-1 px-2 text-sm sm:text-base sm:px-2 py-1 bg-[#2D9596]  hover:bg-[#237172] duration-100 rounded"
             >
               {isEditable ? <Edit size={18} /> : <Save size={18} />}
               {isEditable ? "Edit" : "Save"}
@@ -65,7 +65,7 @@ const EditorHeader = () => {
         {codeId && (
           <button
             onClick={handleDownloadCode}
-            className=" bg-green-500 rounded-md px-2 py-1 sm:py-1.5 hover:bg-green-600"
+            className=" bg-gray-600 hover:bg-gray-700 rounded-md px-2 py-1 sm:py-1.5"
           >
             <Download size={22} />
           </button>

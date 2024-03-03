@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { all } from "axios";
 
 import { Edit, Loader2, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateCodeDetails, updateIsEditable } from "@/app/code/codeSlice";
 
 import { AlertDialogTrigger } from "@/components/ui/alert-dialog";
@@ -13,8 +13,6 @@ import toast from "react-hot-toast";
 const SavedCode = () => {
   const [allCode, setAllCode] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  const isLogin = useSelector((state) => state.auth.isLogin);
 
   const dispatch = useDispatch();
 
@@ -63,13 +61,6 @@ const SavedCode = () => {
   }
 
   useEffect(() => {
-    if (!isLogin) {
-      navigate("/login");
-      toast.error("Please login to proceed!");
-    }
-  }, []);
-
-  useEffect(() => {
     getSavedCode();
   }, []);
 
@@ -83,17 +74,17 @@ const SavedCode = () => {
               key={code?._id}
             >
               <h1 className="text-gray-200 text-sm">{code?.title}</h1>
-              <div className="flex items-center gap-3 mt-3">
+              <div className="flex items-center gap-3 mt-3 justify-center sm:justify-normal">
                 <button
                   onClick={() => handleEditCode(code)}
-                  className="flex items-center gap-1 px-2 py-1 bg-purple-700 text-gray-300 hover:text-white rounded text-sm"
+                  className="flex items-center gap-1 px-2 py-1 bg-[#2D9596] text-gray-300 hover:text-white rounded text-xs sm:text-sm"
                 >
                   <Edit size={13} />
                   Edit
                 </button>
                 <AlertModal handleDeleteCode={() => handleDeleteCode(code)}>
                   <AlertDialogTrigger asChild>
-                    <button className="flex items-center gap-1 px-2 py-1 bg-red-700 text-gray-300 hover:text-white rounded text-sm">
+                    <button className="flex items-center gap-1 px-2 py-1 bg-red-700 text-gray-300 hover:text-white rounded text-xs sm:text-sm">
                       <Trash2 size={14} />
                       Delete
                     </button>

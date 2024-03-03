@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, startTransition } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -22,9 +22,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    startTransition(() => {
-      updateAuthState(dispatch);
-    });
+    updateAuthState(dispatch);
   }, []);
 
   const router = createBrowserRouter(

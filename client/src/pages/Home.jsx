@@ -6,7 +6,7 @@ const Home = () => {
       <section className=" text-white">
         <div className="mx-auto max-w-screen-xl px-4 py-10 lg:flex lg:items-center">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl ">
+            <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-green-400 bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl ">
               Welcome to Codify.
             </h1>
 
@@ -19,14 +19,14 @@ const Home = () => {
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link
                 to={"/compiler"}
-                className="block w-full rounded border border-purple-700 bg-purple-700 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
+                className="block w-full rounded border border-[#2D9596] bg-[#2D9596] px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto"
                 href="#"
               >
                 Get Started
               </Link>
 
               <a
-                className="block w-full rounded border border-purple-700 px-12 py-3 text-sm font-medium text-white hover:bg-purple-700 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
+                className="block w-full rounded border border-[#2D9596] px-12 py-3 text-sm font-medium text-white hover:[#2D9596] focus:outline-none focus:ring active:bg-[#2D9596] sm:w-auto"
                 href="#"
               >
                 Learn More

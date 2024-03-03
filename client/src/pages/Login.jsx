@@ -102,8 +102,8 @@ const Login = () => {
           <SubmitButton
             handleSubmit={handleSubmit}
             text={loading ? <Loader2 className="animate-spin" /> : "Sign In"}
-            color={"bg-purple-700"}
-            hoverColor={"hover:bg-purple-800"}
+            color={"bg-[#2D9596]"}
+            hoverColor={"hover:bg-[#237172]"}
             px={"px-5"}
             py={"py-3"}
             type={"submit"}

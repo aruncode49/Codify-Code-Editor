@@ -17,16 +17,20 @@ import { updateCodeDetails, updateIsEditable } from "@/app/code/codeSlice";
 
 export function SaveDialog({ children }) {
   const [title, setTitle] = useState("");
+
   const fullCode = useSelector((state) => state.code.fullCode);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const isEditable = useSelector((state) => state.code.isEditable);
   const codeDetails = useSelector((state) => state.code.codeDetails);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   async function handleSaveCode() {
     if (title == "") return toast.error("Please add a title!");
+    let toastId = null;
     try {
+      toastId = toast.loading("Code Saving...");
       const res = await axios.post("/api/v1/code/save", {
         fullCode,
         title,
@@ -38,12 +42,18 @@ export function SaveDialog({ children }) {
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
+    } finally {
+      if (toastId) {
+        toast.dismiss(toastId);
+      }
     }
   }
 
   async function handleEditCode() {
     if (title == "") return toast.error("Please add a title!");
+    let toastId = null;
     try {
+      toastId = toast.loading("Code Updating...");
       const res = await axios.put(`/api/v1/code/edit/${codeDetails._id}`, {
         fullCode,
         title,
@@ -57,6 +67,10 @@ export function SaveDialog({ children }) {
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
+    } finally {
+      if (toastId) {
+        toast.dismiss(toastId);
+      }
     }
   }
 
